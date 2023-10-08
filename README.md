@@ -38,3 +38,5 @@ CDP offers `Runtime.evaluate` that allows us to execute a script remotely. Using
 **Have Fun**
 🎉🎉🎉🎉
 
+**PS**:
+This repo is for Educational and Research purpose only.

@@ -2,6 +2,8 @@
 
 const CDP = require('chrome-remote-interface');
 const fs = require('fs');
+const yargs = require('yargs');
+const argv = yargs.argv;
 
 const cdp_js_content = fs.readFileSync('cdp.js', 'utf8');
 
@@ -42,7 +44,8 @@ async function getOutput(input) {
 }
 
 async function run() {
-    const output = await getOutput("how many letters are there in english alphabet?")
+    let query = argv.query
+    const output = await getOutput(query)
     console.log(`output: ${output}`)
     
 }

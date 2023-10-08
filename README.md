@@ -5,6 +5,17 @@ Assuming you are on ChatGPT Plus plan, I wanted to have an affordable fast paced
 *About this repo*
 chatgpt4-scraper uses a combination of tools to query ChatGPT and returns the output. At high level, this is a simple wrapper service that emulates human behavior by entering input as query, waits for response, and makes it available to `callee`.
 
+*Requirements*
+- Needs node 18+ (tested on 18.15.0)
+- Chrome Stable or Chrome Canary running in CDP mode.
+- ChatGPT Plus account
+
+*Steps*
+- run `npm install` to install all packages.
+- `/Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary --remote-debugging-port=9222` run Chrome Canary on port 9222
+- login to ChatGPT and keep the window open. Start a new chat (recommended)
+- `node main.cjs --query "Hi There"`
+
 *Technical Details*
 - Use Chrome Debugging Protocol (CDP) to open a headful Chrome browser sesssion.
 - Make sure you are already logged in to https://chat.openai.com/ and have a new chat session with the preferred model active.
@@ -21,6 +32,7 @@ The response uses attribute [data-testid], once we match for this substring, we 
 - `main.cjs`: main script to query OpenAI via CDP and get the response.
 CDP offers `Runtime.evaluate` that allows us to execute a script remotely. Using await, we wait till response is returned.
 `Runtime.getPoperties` allows us to get the response from cdp.js and make it available to our main.cjs program.
+
 
 
 **Have Fun**

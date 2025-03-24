@@ -11,14 +11,7 @@ function sleepyTime(sleepTime) {
 
 async function submitForm(inputQuery) {
     let textarea = document.getElementById('prompt-textarea');
-    textarea.value = inputQuery;
-    await sleepyTime();
-
-    let inputEvent = new Event('input', {
-        'bubbles': true,
-        'cancelable': true
-    });
-    textarea.dispatchEvent(inputEvent);
+    textarea.getElementsByTagName("p")[0].textContent = inputQuery
     await sleepyTime();
 
     let submitButton = document.querySelector('[data-testid="send-button"]');

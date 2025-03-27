@@ -7,6 +7,15 @@ const argv = yargs.argv;
 
 const cdp_js_content = fs.readFileSync('cdp.js', 'utf8');
 
+function sleepyTime(sleepTime) {
+    return new Promise(resolve => {
+        if (sleepTime === undefined) {
+            sleepTime = Math.random() * 5000; // Random duration up to 5 seconds
+        }
+        setTimeout(resolve, sleepTime);
+    });
+}
+
 async function getOutput(input) {
     let client, outputProp
     try {
@@ -19,14 +28,13 @@ async function getOutput(input) {
         await DOM.getDocument();
 
         // Define the script that will be evaluated on the page.
-        const scriptToEvaluate = `${cdp_js_content}submitForm('${input}');`;
+        const scriptToEvaluate = `  debugger;${cdp_js_content}submitForm('${input}');`;
 
         // Execute the script on the page.
         const result = await Runtime.evaluate({ 
             expression: scriptToEvaluate, 
             awaitPromise: true  // This tells CDP to wait for the promise to resolve
         });
-
         if (result.result.objectId) {
             const properties = await Runtime.getProperties({ objectId: result.result.objectId });
             outputProp = properties.result.find(prop => prop.name === "output");
@@ -45,8 +53,10 @@ async function getOutput(input) {
 
 async function run() {
     let query = argv.query
+    let is_base64 = argv.is_base64
+    // query = is_base64 ? Buffer.from(query, 'base64').toString('utf-8') : query
     const output = await getOutput(query)
-    console.log(`output: ${output}`)
+    console.log(`${output}`)
     
 }
 

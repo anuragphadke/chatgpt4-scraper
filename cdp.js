@@ -10,6 +10,7 @@ function sleepyTime(sleepTime) {
 }
 
 async function submitForm(inputQuery) {
+    inputQuery = atob(inputQuery)
     let textarea = document.getElementById('prompt-textarea');
     textarea.getElementsByTagName("p")[0].textContent = inputQuery
     await sleepyTime();
@@ -19,7 +20,7 @@ async function submitForm(inputQuery) {
         submitButton.click();
     }
 
-    await sleepyTime(10000);
+    await sleepyTime(45000);
 
     var elements = document.querySelectorAll('[data-testid^="conversation"]');
 

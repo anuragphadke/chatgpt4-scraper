@@ -14,7 +14,7 @@ chatgpt4-scraper uses a combination of tools to query ChatGPT and returns the ou
 - run `npm install` to install all packages.
 - `/Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary --remote-debugging-port=9222` run Chrome Canary on port 9222
 - login to ChatGPT and keep the window open. Start a new chat (recommended)
-- `node main.cjs --query "Hi There"`
+- `node main.cjs --is_base64 true --query "SGkgVGhlcmU="`
 
 *Technical Details*
 - Use Chrome Debugging Protocol (CDP) to open a headful Chrome browser sesssion.
